@@ -9,9 +9,37 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+Libraries
+```{r}
+#install.packages("SASxport")
+library(SASxport)
+
+```
+
+
 OSEMN Framework
 
 Obtain
+
+Read SAS file from CDC site
+```{r}
+?SASxport
+?read.xport
+
+#Blood pressure and cholesteral 2015-2016 data
+bpc <- read.xport("BPQ_I.XPT")
+head(bpc)
+
+#Diertary Interview - Individual Foods, First Day
+dr1 <- read.xport("DR1IFF_I.XPT")
+head(dr1)
+
+#Diertary Interview - Individual Foods, Second Day
+dr2 <- read.xport("DR2IFF_I.XPT")
+head(dr2)
+
+read.csv("Nutrition__Physical_Activity__and_Obesity_-_Policy_and_Environmental_Data.csv")
+```
 
 
 Scrub
