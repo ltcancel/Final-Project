@@ -1,0 +1,26 @@
+---
+title: "Final Project"
+author: "LeTicia Cancel"
+date: "11/30/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+OSEMN Framework
+
+Obtain
+
+
+Scrub
+
+
+Explore
+
+
+Model
+
+
+Interpret
