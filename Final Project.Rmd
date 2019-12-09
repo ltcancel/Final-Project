@@ -14,7 +14,7 @@ Libraries
 #install.packages("SASxport")
 library(dplyr)
 library(tidyverse)
-
+library(ggplot2)
 ```
 
 
@@ -59,12 +59,21 @@ Scrub
 sr.2015 <- filter(master_sr, year == "2015")
 
 #join 2015 data
-full_join(sr.2015, happy2015, by = c("ï..country" = "Country"))
+full2015 <- full_join(sr.2015, happy2015, by = c("ï..country" = "Country"))
 
+full2015
+
+sum2015 <- full2015 %>%
+  #filter(na.rm == TRUE) %>%
+  group_by(Region) %>%
+  summarise(suicide_total = sum(suicides_no, na.rm = TRUE), pop = sum(population, na.rm = TRUE), rank = mean(Happiness.Score, na.rm = TRUE))
 ```
 
 
 Explore
+```{r}
+ggplot(sum2015, aes(Region)) +  geom_bar()
+```
 
 
 Model
