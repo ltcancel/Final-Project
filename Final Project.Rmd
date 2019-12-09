@@ -12,7 +12,8 @@ knitr::opts_chunk$set(echo = TRUE)
 Libraries
 ```{r}
 #install.packages("SASxport")
-library(SASxport)
+library(dplyr)
+library(tidyverse)
 
 ```
 
@@ -21,28 +22,46 @@ OSEMN Framework
 
 Obtain
 
-Read SAS file from CDC site
+Read CSV file from Github
 ```{r}
-?SASxport
-?read.xport
+#Master Suicide Rate CSV file
+master_sr_file <- "https://raw.githubusercontent.com/ltcancel/Final-Project/master/Global_Suicide_Rate.csv"
 
-#Blood pressure and cholesteral 2015-2016 data
-bpc <- read.xport("BPQ_I.XPT")
-head(bpc)
+master_sr <- read.csv(master_sr_file, sep = ",", header = TRUE)
+head(master_sr)
 
-#Diertary Interview - Individual Foods, First Day
-dr1 <- read.xport("DR1IFF_I.XPT")
-head(dr1)
+#Happiness data
+file2015 <- "https://raw.githubusercontent.com/ltcancel/Final-Project/master/2015.csv"
+file2016 <- "https://raw.githubusercontent.com/ltcancel/Final-Project/master/2016.csv"
+file2017 <- "https://raw.githubusercontent.com/ltcancel/Final-Project/master/2017.csv"
+file2018 <- "https://raw.githubusercontent.com/ltcancel/Final-Project/master/2018.csv"
+file2019 <- "https://raw.githubusercontent.com/ltcancel/Final-Project/master/2019.csv"
 
-#Diertary Interview - Individual Foods, Second Day
-dr2 <- read.xport("DR2IFF_I.XPT")
-head(dr2)
+happy2015 <- read.csv(file2015, sep = ",", header = TRUE)
+happy2016 <- read.csv(file2016, sep = ",", header = TRUE)
+happy2017 <- read.csv(file2017, sep = ",", header = TRUE)
+happy2018 <- read.csv(file2018, sep = ",", header = TRUE)
+happy2019 <- read.csv(file2019, sep = ",", header = TRUE)
 
-read.csv("Nutrition__Physical_Activity__and_Obesity_-_Policy_and_Environmental_Data.csv")
+head(happy2015)
+
+happy2015 <- add_column(happy2015, year = 2015)
+add_column(happy2016, year = 2016)
+add_column(happy2017, year = 2017)
+add_column(happy2018, year = 2018)
+add_column(happy2019, year = 2019)
 ```
 
 
 Scrub
+```{r}
+#filter master suicide rate data to 2015 only
+sr.2015 <- filter(master_sr, year == "2015")
+
+#join 2015 data
+full_join(sr.2015, happy2015, by = c("ï..country" = "Country"))
+
+```
 
 
 Explore
