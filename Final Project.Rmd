@@ -25,10 +25,10 @@ Obtain
 Read CSV file from Github
 ```{r}
 #Master Suicide Rate CSV file
-master_sr_file <- "https://raw.githubusercontent.com/ltcancel/Final-Project/master/Global_Suicide_Rate.csv"
+#master_sr_file <- "https://raw.githubusercontent.com/ltcancel/Final-Project/master/Global_Suicide_Rate.csv"
 
-master_sr <- read.csv(master_sr_file, sep = ",", header = TRUE)
-head(master_sr)
+#master_sr <- read.csv(master_sr_file, sep = ",", header = TRUE)
+#head(master_sr)
 
 #Happiness data
 file2015 <- "https://raw.githubusercontent.com/ltcancel/Final-Project/master/2015.csv"
@@ -51,28 +51,28 @@ happy2017 <- add_column(happy2017, year = 2017)
 happy2018 <- add_column(happy2018, year = 2018)
 happy2019 <- add_column(happy2019, year = 2019)
 
-#head(happy2015)
+head(happy2017)
 #head(happy2016)
 
 #master.happy <- rbind(happy2015,happy2016)
 
 #Region tibble for later use
-region <- happy2015[,1:2] %>%
-  group_by(Country) %>%
-  group_by(Region)
+#region <- happy2015[,1:2] %>%
+ # group_by(Country) %>%
+ # group_by(Region)
 
-region
+#region
 
 #select subset  
-happy2019 <- select(happy2019,Country.or.region,Overall.rank,Score,Healthy.life.expectancy,Generosity,year)
+happy2019 <- select(happy2019,Region,Country,Happiness.Rank,Happiness.Score,Health..Life.Expectancy.,Generosity,year)
 head(happy2019)
 
-happy2018 <- select(happy2018,Country.or.region,Overall.rank,Score,Healthy.life.expectancy,Generosity,year)
-happy2017 <- select(happy2017,Country,Happiness.Rank,Happiness.Score,Health..Life.Expectancy.,Generosity,year)
-happy2016 <- select(happy2016,Country,Happiness.Rank,Happiness.Score,Health..Life.Expectancy.,Generosity,year)
-happy2015 <- select(happy2015,Country,Happiness.Rank,Happiness.Score,Health..Life.Expectancy.,Generosity,year)
+happy2018 <- select(happy2018,Region,Country,Happiness.Rank,Happiness.Score,Health..Life.Expectancy.,Generosity,year)
+happy2017 <- select(happy2017,Region,Country,Happiness.Rank,Happiness.Score,Health..Life.Expectancy.,Generosity,year)
+happy2016 <- select(happy2016,Region,Country,Happiness.Rank,Happiness.Score,Health..Life.Expectancy.,Generosity,year)
+happy2015 <- select(happy2015,Region,Country,Happiness.Rank,Happiness.Score,Health..Life.Expectancy.,Generosity,year)
 
-master.happy <- rbind(happy2015,happy2016,happy2017)
+master.happy <- rbind(happy2015,happy2016,happy2017,happy2018,happy2019)
 master.happy
 ```
 
@@ -100,7 +100,7 @@ Explore happiness data
 top.ten <- master.happy %>% filter(Happiness.Rank <= 5)
 top.ten
   
-ggplot(top.ten, aes(x=Happiness.Rank, y=year)) + geom_histogram()
+ggplot(top.ten, aes(x=Happiness.Rank, y=year)) + geom_histogram(Regio)
 ```
 
 
