@@ -96,11 +96,13 @@ sum2015 <- full2015 %>%
 
 Explore happiness data
 ```{r}
-#top 10 rank
-top.ten <- master.happy %>% filter(Happiness.Rank <= 5)
-top.ten
-  
-ggplot(top.ten, aes(x=Happiness.Rank, y=year)) + geom_histogram(Regio)
+group.master <- master.happy %>%
+  group_by(Region,year) %>%
+  summarise(avg_score = mean(Happiness.Score))
+
+ggplot(group.master,aes(avg_score)) + geom_area(stat = "bin")
+
+qplot(year,data = group.master,geom = "histogram",fill = avg_score)
 ```
 
 
