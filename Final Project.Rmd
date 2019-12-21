@@ -96,7 +96,11 @@ sum2015 <- full2015 %>%
 
 Explore happiness data
 ```{r}
-ggplot(sum2015, aes(Region)) +  geom_bar()
+#top 10 rank
+top.ten <- master.happy %>% filter(Happiness.Rank <= 5)
+top.ten
+  
+ggplot(top.ten, aes(x=Happiness.Rank, y=year)) + geom_histogram()
 ```
 
 
