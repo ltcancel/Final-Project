@@ -43,7 +43,7 @@ happy2017 <- read.csv(file2017, sep = ",", header = TRUE)
 happy2018 <- read.csv(file2018, sep = ",", header = TRUE)
 happy2019 <- read.csv(file2019, sep = ",", header = TRUE)
 
-head(happy2015)
+#head(happy2015)
 
 happy2015 <- add_column(happy2015, year = 2015)
 happy2016 <- add_column(happy2016, year = 2016)
@@ -51,10 +51,10 @@ happy2017 <- add_column(happy2017, year = 2017)
 happy2018 <- add_column(happy2018, year = 2018)
 happy2019 <- add_column(happy2019, year = 2019)
 
-head(happy2015)
-head(happy2016)
+#head(happy2015)
+#head(happy2016)
 
-master.happy <- rbind(happy2015,happy2016)
+#master.happy <- rbind(happy2015,happy2016)
 
 #Region tibble for later use
 region <- happy2015[,1:2] %>%
@@ -64,13 +64,16 @@ region <- happy2015[,1:2] %>%
 region
 
 #select subset  
-happy2019 <- select(happy2019,Overall.rank,Country.or.region,Score,Healthy.life.expectancy,Generosity,year)
+happy2019 <- select(happy2019,Country.or.region,Overall.rank,Score,Healthy.life.expectancy,Generosity,year)
 head(happy2019)
 
-happy2018 <- select(happy2018,Overall.rank,Country.or.region,Score,Healthy.life.expectancy,Generosity,year)
+happy2018 <- select(happy2018,Country.or.region,Overall.rank,Score,Healthy.life.expectancy,Generosity,year)
 happy2017 <- select(happy2017,Country,Happiness.Rank,Happiness.Score,Health..Life.Expectancy.,Generosity,year)
 happy2016 <- select(happy2016,Country,Happiness.Rank,Happiness.Score,Health..Life.Expectancy.,Generosity,year)
 happy2015 <- select(happy2015,Country,Happiness.Rank,Happiness.Score,Health..Life.Expectancy.,Generosity,year)
+
+master.happy <- rbind(happy2015,happy2016,happy2017)
+master.happy
 ```
 
 
